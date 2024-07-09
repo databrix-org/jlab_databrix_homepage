@@ -7,9 +7,9 @@
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://github.com/guyq1997/jlab_homepage",
+    "homepage": "https://github.com/databrix-org/jlab_databrix_homepage",
     "bugs": {
-        "url": "https://github.com/guyq1997/jlab_homepage/issues"
+        "url": "https://github.com/databrix-org/jlab_databrix_homepage/issues"
     },
     "license": "BSD-3-Clause",
     "author": {
@@ -26,7 +26,7 @@
     "style": "style/index.css",
     "repository": {
         "type": "git",
-        "url": "https://github.com/guyq1997/jlab_homepage.git"
+        "url": "https://github.com/databrix-org/jlab_databrix_homepage.git"
     },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
