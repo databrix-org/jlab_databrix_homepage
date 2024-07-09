@@ -1,0 +1,14 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.3.2
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: gyq673516081@gmail.com
+author_name: Yuqiang Gu
+has_binder: true
+has_settings: false
+kind: server
+labextension_name: jlab_homepage
+project_short_description: A JupyterLab extension for homepage with frontend and backend
+python_name: jlab_homepage
+repository: https://github.com/guyq1997/jlab_homepage
+test: true
+
