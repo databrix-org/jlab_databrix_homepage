@@ -57,8 +57,8 @@
     },
     "dependencies": {
         "@jupyterlab/application": "^4.0.0",
-        "@jupyterlab/coreutils": "^6.0.0",
-        "@jupyterlab/services": "^7.0.0"
+        "@jupyterlab/coreutils": "^6.2.3",
+        "@jupyterlab/services": "^7.2.3"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",

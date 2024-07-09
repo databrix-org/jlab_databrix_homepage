@@ -3,3 +3,124 @@
 
     https://jupyterlab.readthedocs.io/en/stable/developer/css.html
 */
+/*
+    See the JupyterLab Developer Guide for useful CSS Patterns:
+
+    https://jupyterlab.readthedocs.io/en/stable/developer/css.html
+*/
+
+.my-apodWidget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    justify-content: center;
+    height: 100%;
+    background-color:  linear-gradient(135deg, #f5f7fa, #365588);
+}
+
+.container {
+    text-align: center;
+    background-color:  linear-gradient(135deg, #f5f7fa, #365588);
+}
+
+h1 {
+    font-size: 5em; /* Increased to 2 times larger */
+    margin-bottom: 0.4em; /* Increased margin */
+}
+
+p.subtitle {
+    color: #888;
+    font-size: 2.4em; /* Increased to 2 times larger */
+    margin-top: 0;
+}
+
+.card {
+            background-color: white;
+            padding: 2em;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 4em 0;
+        }
+
+.card h2 {
+    font-size: 2em; /* Increased to 2 times larger */
+    margin: 0 0 2em 0; /* Increased margin */
+}
+
+.contact {
+            text-align: center;
+            margin-top: 4em;
+        }
+.contact h2 {
+    font-size: 2em; /* Increased to 2 times larger */
+    margin-bottom: 1em; /* Increased margin */
+}
+
+.contact p {
+    font-size: 2em; /* Increased to 2 times larger */
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;  /* Space between buttons */
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    background-color: #29293f;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 2em 0;
+    transition: transform 0.2s;
+    width: 280px;
+    height: 160px;  /* Increase the height to make the button higher */
+    overflow: hidden;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    padding: 0;  /* Remove default button padding */
+}
+
+.button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.button .icon {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;  /* Ensure the icon section height matches the button height */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 80px;
+}
+
+.button .icon img {
+    height: 200px;
+}
+
+.button span {
+    flex: 1;
+    padding: 1em;
+    color: #ffffff;
+    background-color: #29293f;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-decoration: none;
+    font-size: 1.5em;  /* Increase font size for better proportion */
+    text-align: Center;
+    display: flex;
+    align-items: center;
+    height: 100%;  /* Ensure the text section height matches the button height */
+}
+
+/* Style for the second button */
+.button.secondary .icon {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background-size: contain;
+}

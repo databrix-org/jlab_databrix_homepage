@@ -10,15 +10,53 @@ class RouteHandler(APIHandler):
     # Jupyter server
     @tornado.web.authenticated
     def get(self):
+      try:
+        file_path = r'/tmp/exchange/group_info.json'
+        with open(file_path, 'r') as file:
+            json_data = json.load(file)
+
         self.finish(json.dumps({
-            "data": "This is /jlab-homepage/get-example endpoint!"
+            "data": "This is /jlab-homepage/gruppeninfo endpoint!",
+            "response" : json_data
+        }))
+      except:
+         self.finish(json.dumps({
+            "data": "Error! File not found!"
         }))
 
+    @tornado.web.authenticated
+    def post(self):
+        # input_data is a dictionary with a key "name"
+      input_data = self.get_json_body()
+      username = input_data["username"]
+      try:
+        file_path = r'/tmp/exchange/group_info.json'
+        with open(file_path, 'r') as file:
+            json_data = json.load(file)
+
+        group_members = ['unknown']
+        group = 'unkonwn'
+
+        for k,v in json_data.items():
+          if username in json_data[k]:
+            group_members = json_data[k]
+            group = k
+            break
+
+        self.finish(json.dumps({
+            "members":group_members,
+            "workspace": group,
+        }))
+
+      except:
+         self.finish(json.dumps({
+            "data": "Error! File not found!"
+        }))
 
 def setup_handlers(web_app):
     host_pattern = ".*$"
 
     base_url = web_app.settings["base_url"]
-    route_pattern = url_path_join(base_url, "jlab-homepage", "get-example")
+    route_pattern = url_path_join(base_url, "jlab-homepage", "gruppeninfo")
     handlers = [(route_pattern, RouteHandler)]
     web_app.add_handlers(host_pattern, handlers)
