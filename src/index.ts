@@ -64,7 +64,7 @@ class databrixWidget extends Widget {
                                             method: 'POST'});
         
         showDialog({
-          title: 'Gruppen Information',
+          title: 'Workspace Information',
           body: `
               Sie sind in der Gruppe: ${data.workspace}
               Ihre Teammates sind: ${data.members.join(';')}
@@ -73,7 +73,7 @@ class databrixWidget extends Widget {
         });
 
         showDialog({
-          title: 'Gruppen Information',
+          title: 'Workspace Information',
           body: `
               Bei Fragen oder Gruppenänderungen kontaktieren Sie uns bitte an admin@databrix.org!
           `,
