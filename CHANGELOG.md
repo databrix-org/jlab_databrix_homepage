@@ -1,6 +1,12 @@
 # Changelog
 
 <!-- <START NEW CHANGELOG ENTRY> -->
+
+## 0.1.3
+
+No merged PRs
+
+<!-- <END NEW CHANGELOG ENTRY> -->
 <<<<<<< HEAD
 Version for student and teacher
 =======
@@ -9,7 +15,6 @@ Version for student and teacher
 
 No merged PRs
 
-<!-- <END NEW CHANGELOG ENTRY> -->
 <<<<<<< HEAD
 First release
 >>>>>>> 2780847b7c0f45452ccbddacabe53d00c2efb175
