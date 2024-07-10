@@ -20,64 +20,130 @@ import { toArray } from '@lumino/algorithm';
 import { requestAPI } from './handler';
 
 
+interface GroupInfo { 
+  [key: string]: string[];
+}
+
+
+class InfoWidget extends Widget {
+    /**
+    * Construct a new databrix widget.
+    */
+
+    constructor(group_info: GroupInfo) {
+      super();
+
+      const jsonData = group_info as GroupInfo
+      
+      this.addClass('my-apodWidget');
+
+      // Create container and add it to the widget
+      const groupContainer = document.createElement('div');
+      groupContainer.id = 'groupContainer';
+
+      this.node.innerHTML = `
+
+        <h2>Workspace</h2>
+        <h4>Bei Fragen oder Gruppenwechsel kontaktieren Sie uns bitte über admin@databrix.org</h4>
+      `;
+
+      this.node.appendChild(groupContainer);
+
+      for (const group in jsonData) {
+        // Create card element
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        // Create group name
+        const groupName = document.createElement("div");
+        groupName.classList.add("group-name");
+        groupName.textContent = group;
+
+        // Create items container
+        const groupItems = document.createElement("div");
+        groupItems.classList.add("group-items");
+
+        // Add items to container
+        jsonData[group].forEach(item => {
+          const listItem = document.createElement("div");
+          listItem.textContent = `- ${item}`;
+          groupItems.appendChild(listItem);
+        });
+
+        // Append to card
+        card.appendChild(groupName);
+        card.appendChild(groupItems);
+
+        // Append card to main container
+        groupContainer.appendChild(card);
+      }
+    }
+}
+
 class databrixWidget extends Widget {
     /**
     * Construct a new databrix widget.
     */
 
-    constructor(username: string) {
+    constructor(username: string, rolle: boolean) {
       super();
 
+      const buttonContainer = document.createElement('div');
+      buttonContainer.classList.add("button-container");      
       this.addClass('my-apodWidget');
       
+      // Get a reference to the button container
       this.node.innerHTML = `
-
         <div class="container">
-            <h1>Databrix Lab</h1>
-            <p class="subtitle">Lernen Sie Data Science und Machine Learning in der Praxis!</p>
+          <h1>Databrix Lab</h1>
+          <p class="subtitle">Lernen Sie Data Science und Machine Learning in der Praxis!</p>
         </div>
+      `;
+      this.node.appendChild(buttonContainer);
 
-        <div class="button-container">        
-            <button data-commandLinker-command="nbgrader:open-assignment-list" class="button">
-                <div class="icon"></div>
-                <span>Praxisprojekte starten</span>
-            </button>
-      
-            <button id = "switchGroupButton" class="button secondary">
-                <div class="icon"></div>
-                <span>Mein Workspace</span>
-            </button>
-        </div>
-          `;
+      if (rolle) {
+        buttonContainer.innerHTML = `
+          <button data-commandLinker-command="nbgrader:open-formgrader" class="button">
+            <div class="icon"></div>
+            <span>Projekte verwalten</span>
+          </button>
+          <button id="switchGroupButton" class="button secondary">
+            <div class="icon"></div>
+            <span>Workspace Infos</span>
+          </button>
+        `;
+      } else {
+        buttonContainer.innerHTML = `
+          <button data-commandLinker-command="nbgrader:open-assignment-list" class="button">
+            <div class="icon"></div>
+            <span>Projekte starten</span>
+          </button>
+          <button id="switchGroupButton" class="button secondary">
+            <div class="icon"></div>
+            <span>Mein Workspace</span>
+          </button>
+        `;
+      }
     
       const switchGroupButton = this.node.querySelector('#switchGroupButton') as HTMLButtonElement;
       switchGroupButton.addEventListener('click', () => {
-        this.showgroupinfo(username);
+        this.showgroupinfo(username,rolle);
       });
     }
 
-    async showgroupinfo(username: string) {
+    async showgroupinfo(username: string, rolle: boolean) {
       try {
-        const dataToSend = {"username":username}
+        const dataToSend = {"username":username, "Rolle":rolle}
         const data = await requestAPI<any>('gruppeninfo',{
                                             body: JSON.stringify(dataToSend),
                                             method: 'POST'});
-        
-        showDialog({
-          title: 'Workspace Information',
-          body: `
-              Sie sind in der Gruppe: ${data.workspace}
-              Ihre Teammates sind: ${data.members}
-          `,
-          buttons: [Dialog.okButton()]          
-        });
 
+        const dialogwidget = new InfoWidget(data);
+  
         showDialog({
           title: 'Workspace Information',
-          body: `
-              Bei Fragen oder Gruppenänderungen kontaktieren Sie uns bitte an admin@databrix.org!
-          `,
-          buttons: [Dialog.okButton()]
+          body: dialogwidget,
+          buttons: [Dialog.okButton()]          
         });
 
       } catch (error: any) {
@@ -120,12 +186,22 @@ function activate(app: JupyterFrontEnd,
   console.log('JupyterLab extension databrix homepage is activated!');
 
 
-  const user = app.serviceManager.user;
-  const username = app.serviceManager.user?.identity?.username;
-  user.ready.then(() => {
-     console.debug("Identity:", user.identity);
-     console.debug("Permissions:", user.permissions);
+
+  let rolle: boolean | null = null;
+
+  requestAPI<any>('gruppeninfo')
+    .then(UserData => {
+       rolle = UserData.dozent;
+    })
+                           
+    .catch(reason => {
+      console.error(
+        `The jlab_homepage server extension appears to be missing.\n${reason}`
+      );
   });
+
+
+  const username = app.serviceManager.user?.identity?.username;
 
   // Declare a widget variable
   let widget: MainAreaWidget<databrixWidget>;
@@ -137,7 +213,7 @@ function activate(app: JupyterFrontEnd,
   
     execute: () => {
    
-      const content = new databrixWidget(username ?? "unknown");
+      const content = new databrixWidget(username ?? "unknown", rolle ?? false);
       widget = new MainAreaWidget({content});
       const id = `home-${Private.id++}`;
       widget.id = id

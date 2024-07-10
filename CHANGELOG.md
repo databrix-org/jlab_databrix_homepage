@@ -1,8 +1,7 @@
 # Changelog
 
 <!-- <START NEW CHANGELOG ENTRY> -->
-<<<<<<< HEAD
-First release
+Version for student and teacher
 =======
 
 ## 0.1.1

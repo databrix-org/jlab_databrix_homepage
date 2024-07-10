@@ -11,17 +11,17 @@ class RouteHandler(APIHandler):
     @tornado.web.authenticated
     def get(self):
       try:
-        file_path = r'/tmp/exchange/group_info.json'
+        file_path = r"/tmp/exchange/databrix_user_credential.json"
         with open(file_path, 'r') as file:
             json_data = json.load(file)
 
-        self.finish(json.dumps({
-            "data": "This is /jlab-homepage/gruppeninfo endpoint!",
-            "response" : json_data
-        }))
+        self.finish(json.dumps(
+            json_data
+        ))
+
       except:
          self.finish(json.dumps({
-            "data": "Error! File not found!"
+            "dozent": False
         }))
 
     @tornado.web.authenticated
@@ -29,29 +29,45 @@ class RouteHandler(APIHandler):
         # input_data is a dictionary with a key "name"
       input_data = self.get_json_body()
       username = input_data["username"]
-      try:
-        file_path = r'/tmp/exchange/group_info.json'
-        with open(file_path, 'r') as file:
-            json_data = json.load(file)
+      rolle = input_data["Rolle"]
+      if rolle == True:
+        try:
+          file_path = r"/tmp/exchange/group_info.json"
+          with open(file_path, 'r') as file:
+              json_data = json.load(file)
 
-        group_members = ['unknown']
-        group = 'unkonwn'
+          self.finish(json.dumps(
+              json_data
+          ))
+        except:
+           self.finish(json.dumps({
+              "data": "Error! File not found!"
+          }))
 
-        for k,v in json_data.items():
-          if username in json_data[k]:
-            group_members = json_data[k]
-            group = k
-            break
 
-        self.finish(json.dumps({
-            "members":group_members,
-            "workspace": group,
-        }))
+      else:
+        try:
+          file_path = r"/tmp/exchange/group_info.json"
+          with open(file_path, 'r') as file:
+              json_data = json.load(file)
 
-      except:
-         self.finish(json.dumps({
-            "data": "Error! File not found!"
-        }))
+          group_members = ['unknown']
+          group = 'unkonwn'
+
+          for k,v in json_data.items():
+            if username in json_data[k]:
+              group_members = json_data[k]
+              group = k
+              break
+
+          self.finish(json.dumps({
+              "Ihre Gruppe":[group],
+              "Ihre Teammates": group_members,
+          }))
+        except:
+           self.finish(json.dumps({
+              "data": "Error! File not found!"
+          }))
 
 def setup_handlers(web_app):
     host_pattern = ".*$"

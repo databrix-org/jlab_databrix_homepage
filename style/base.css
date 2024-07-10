@@ -124,3 +124,20 @@ p.subtitle {
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     background-size: contain;
 }
+
+.card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.group-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.group-items {
+  margin-left: 20px;
+}
