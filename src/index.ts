@@ -67,7 +67,7 @@ class databrixWidget extends Widget {
           title: 'Workspace Information',
           body: `
               Sie sind in der Gruppe: ${data.workspace}
-              Ihre Teammates sind: ${data.members.join(';')}
+              Ihre Teammates sind: ${data.members}
           `,
           buttons: [Dialog.okButton()]          
         });
