@@ -10,16 +10,15 @@ export async function showgroupinfo(username: string, hubmainUrl: string) {
   try {
     const url = new URL(window.location.href);
     const pathParts = url.pathname.split('/user/');
-    if (pathParts.length > 1) {
-      const subpath = pathParts[1].split('/')[0];
-      console.log('Subpath after /user/:', subpath);
-      alert(`Subpath after /user/: ${subpath}`);
-    } else {
-      console.log('No subpath after /user/ found');
-      alert('No subpath after /user/ found');
-    }
-    const group_name = subpath.find(part => part.includes("_"))?.split("_")[1] || "";
+
+
+
+    const subpath = pathParts[1].split('/')[0];
+    const group_name = subpath.split("_")[1];
     const hubapiEndpointUrl = `${hubmainUrl}/hub/api/groups/${group_name}`;
+    console.log('Subpath after /user/:', subpath);
+
+
 
 
     const token = PageConfig.getToken();
