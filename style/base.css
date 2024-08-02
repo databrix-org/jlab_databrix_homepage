@@ -19,14 +19,15 @@
     background-color:  linear-gradient(135deg, #f5f7fa, #365588);
 }
 
-.container {
+.home-container {
     text-align: center;
     background-color:  linear-gradient(135deg, #f5f7fa, #365588);
 }
 
-h1 {
-    font-size: 5em; /* Increased to 2 times larger */
-    margin-bottom: 0.4em; /* Increased margin */
+.home-container h1 {
+  /* Your specific styles for the h1 within .home-container */
+  font-size: 5em;  /* Example: Larger font size */
+  margin-bottom: 0.4em; /* Increased margin */
 }
 
 p.subtitle {

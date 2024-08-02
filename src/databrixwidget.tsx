@@ -31,7 +31,7 @@ export class databrixWidget extends Widget {
 
       // Get a reference to the button container
       this.node.innerHTML = `
-        <div class="container">
+        <div class="home-container">
           <h1>Databrix Lab</h1>
           <p class="subtitle">Lernen Sie Data Science und Machine Learning in der Praxis!</p>
         </div>
@@ -68,12 +68,12 @@ export class databrixWidget extends Widget {
             <span>Q&A Forum</span>
           </button>
         `;
+        const switchGroupButton = this.node.querySelector('#GroupInfoButton') as HTMLButtonElement;
+        switchGroupButton.addEventListener('click', () => {
+          showgroupinfo(username, hubmainUrl);
+        });
       }
 
-      const switchGroupButton = this.node.querySelector('#GroupInfoButton') as HTMLButtonElement;
-      switchGroupButton.addEventListener('click', () => {
-        showgroupinfo(username, hubmainUrl);
-      });
     }
 
 }
