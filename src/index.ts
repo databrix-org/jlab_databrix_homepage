@@ -68,7 +68,7 @@ function activate(app: JupyterFrontEnd,
     label: 'Databrix Lab Homepage',
 
     execute: () => {
-      rolle = true
+
       const content = new databrixWidget(username ?? "unknown", rolle ?? false);
       widget = new MainAreaWidget({content});
       const id = `home-${Private.id++}`;
