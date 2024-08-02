@@ -18,7 +18,7 @@ export async function showgroupinfo(username: string, hubmainUrl: string) {
       console.log('No subpath after /user/ found');
       alert('No subpath after /user/ found');
     }
-    const group_name = pathParts.find(part => part.includes("_"))?.split("_")[1] || "";
+    const group_name = subpath.find(part => part.includes("_"))?.split("_")[1] || "";
     const hubapiEndpointUrl = `${hubmainUrl}/hub/api/groups/${group_name}`;
 
 
