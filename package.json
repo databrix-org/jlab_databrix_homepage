@@ -1,6 +1,6 @@
 {
     "name": "jlab_homepage",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "A JupyterLab extension for homepage with frontend and backend",
     "keywords": [
         "jupyter",
