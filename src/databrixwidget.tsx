@@ -48,6 +48,10 @@ export class databrixWidget extends Widget {
             <div class="icon admin-icon"></div>
             <span>Gruppen verwalten</span>
           </button>
+          <button data-commandLinker-command="forum:open" class="button">
+            <div class="icon"></div>
+            <span>Q&A Forum</span>
+          </button>
         `;
       } else {
         buttonContainer.innerHTML = `
@@ -58,6 +62,10 @@ export class databrixWidget extends Widget {
           <button id="GroupInfoButton" class="button secondary">
             <div class="icon"></div>
             <span>Mein Workspace</span>
+          </button>
+          <button data-commandLinker-command="forum:open" class="button">
+            <div class="icon"></div>
+            <span>Q&A Forum</span>
           </button>
         `;
       }
