@@ -42,15 +42,18 @@ function activate(app: JupyterFrontEnd,
 
   let rolle: boolean | null = null;
 
+
   requestAPI<any>('gruppeninfo')
     .then(UserData => {
        rolle = UserData.dozent;
     })
 
     .catch(reason => {
+
       console.error(
         `The jlab_homepage server extension appears to be missing.\n${reason}`
       );
+
   });
 
 
@@ -65,7 +68,7 @@ function activate(app: JupyterFrontEnd,
     label: 'Databrix Lab Homepage',
 
     execute: () => {
-
+      rolle = true
       const content = new databrixWidget(username ?? "unknown", rolle ?? false);
       widget = new MainAreaWidget({content});
       const id = `home-${Private.id++}`;
