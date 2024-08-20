@@ -44,7 +44,7 @@ export class databrixWidget extends Widget {
             <div class="icon"></div>
             <span>Projekte verwalten</span>
           </button>
-          <button id="GroupVerwaltenButton" class="button secondary" onclick="window.location.href = '${admingroupUrl}';">
+          <button id="GroupVerwaltenButton" class="button secondary" onclick="window.open('${admingroupUrl}', '_blank');">
             <div class="icon admin-icon"></div>
             <span>Gruppen verwalten</span>
           </button>
